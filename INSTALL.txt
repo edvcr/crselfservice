@@ -70,6 +70,29 @@ and map the parameters. If there is no GTM on the page, the events
 do nothing and cause no errors.
 
 
+WHAT NOT TO INSTALL
+-------------------
+Only the two files listed above go on the website. Everything else in
+the repository is for demo and preview purposes - do NOT put it on
+the live site:
+
+  index.html        demo page with device tabs (preview only)
+  share.html        demo page (preview only)
+  README.md         repository notes
+  INSTALL.txt       this guide
+
+Notes:
+- The demo pages contain a purple "Open Help Widget (test)" button.
+  That button does NOT exist in dist/help-panel.min.js - the
+  production file has no test code at all, so there is nothing to
+  disable or remove. Just use the file as is.
+- Do not copy the script tag from the demo pages. Use only the
+  script tag shown in the INSTALL section above.
+- The demo pages have articles baked inside them; the production
+  widget instead loads articles live (with help-articles.json as
+  fallback). This is expected.
+
+
 CHECKLIST BEFORE GO-LIVE
 ------------------------
 [ ] Both files uploaded to the same folder
