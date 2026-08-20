@@ -1,0 +1,78 @@
+COINSRAID HELP WIDGET - INSTALL GUIDE
+=====================================
+
+WHAT YOU GET
+------------
+A help widget for coinsraid.com: players browse help articles, search,
+and start a live chat (Zendesk) without leaving the page. Hidden until
+opened from a button on the site.
+
+
+FILES TO UPLOAD (2)
+-------------------
+Put both files in the SAME folder on the website, for example /help/ :
+
+  help-panel.min.js     the widget itself
+  help-articles.json    offline copy of the help articles (fallback)
+
+
+INSTALL (2 steps)
+-----------------
+1. Add this line to every page, next to the existing Zendesk snippet:
+
+   <script src="/help/help-panel.min.js" defer></script>
+
+   (adjust the path if you uploaded the files somewhere else)
+
+2. Make the site's "Help" button open the widget by calling:
+
+   CoinsraidHelp.open()
+
+   Example:
+   <button onclick="CoinsraidHelp.open()">Help</button>
+
+That's it. No API keys, no configuration, no Zendesk changes needed.
+
+
+HOW IT BEHAVES
+--------------
+- Nothing is visible until the first CoinsraidHelp.open() call.
+- The minimize button (-) leaves a small round help icon in the corner
+  so the player can come back quickly. The X hides everything again.
+- "Live Chat" opens the Zendesk chat in place of the article panel.
+  The standard Zendesk launcher bubble is hidden automatically -
+  the widget is the single entry point for support.
+- If an agent replies while the chat is closed, the player gets a
+  small toast notification and an unread counter on the help icon.
+- Works on desktop, tablet and mobile (full screen on phones).
+
+Other available calls, if ever needed:
+  CoinsraidHelp.close()    close everything
+  CoinsraidHelp.toggle()   open/close
+  CoinsraidHelp.chat()     jump straight to live chat
+
+
+UPDATING ARTICLES
+-----------------
+Articles are loaded live from the Help Center when it is reachable.
+The help-articles.json file is only a backup used when it is not.
+To refresh the backup after articles change in Zendesk, ask for a new
+help-articles.json and replace the old file. Nothing else to do.
+
+
+ANALYTICS (optional)
+--------------------
+The widget pushes events into window.dataLayer (Google Tag Manager):
+  help_opened, help_closed, help_search,
+  help_article_viewed, help_chat_opened
+To see them in GA4, add a GTM Custom Event trigger matching help_.*
+and map the parameters. If there is no GTM on the page, the events
+do nothing and cause no errors.
+
+
+CHECKLIST BEFORE GO-LIVE
+------------------------
+[ ] Both files uploaded to the same folder
+[ ] Script tag added
+[ ] Help button wired to CoinsraidHelp.open()
+[ ] Quick test on a phone: open widget, read an article, start a chat
