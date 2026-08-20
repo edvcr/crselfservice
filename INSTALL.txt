@@ -91,11 +91,3 @@ Notes:
 - The demo pages have articles baked inside them; the production
   widget instead loads articles live (with help-articles.json as
   fallback). This is expected.
-
-
-CHECKLIST BEFORE GO-LIVE
-------------------------
-[ ] Both files uploaded to the same folder
-[ ] Script tag added
-[ ] Help button wired to CoinsraidHelp.open()
-[ ] Quick test on a phone: open widget, read an article, start a chat
