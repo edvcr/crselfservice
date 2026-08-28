@@ -61,6 +61,42 @@ Other available calls, if ever needed:
   CoinsraidHelp.close()    close everything
   CoinsraidHelp.toggle()   open/close
   CoinsraidHelp.chat()     jump straight to live chat
+  CoinsraidHelp.login()    retry chat sign-in (see next section)
+  CoinsraidHelp.logout()   sign the player out of chat
+
+
+AUTHENTICATED CHAT (recommended)
+--------------------------------
+Without this, every chat visitor becomes a new anonymous user in
+Zendesk. With it, chats attach to the real player record (matched by
+the CoreX user ID), so agents see who they are talking to and no
+duplicate users are created.
+
+The site backend must expose an endpoint that returns a Zendesk
+messaging JWT for the currently logged-in player (HS256, signed with
+the "cr-auth" messaging signing key; payload: scope "user",
+external_id = CoreX user ID, name, email, email_verified true, short
+expiry). Then tell the widget where it is, before the widget script
+tag:
+
+   <script>window.CRH_AUTH_URL = "/api/zendesk/messaging-jwt";</script>
+
+The endpoint is fetched with cookies (credentials: "include") and may
+return either the raw JWT as text or JSON like {"jwt": "..."}.
+If the request fails (e.g. player not logged in), chat simply
+continues anonymously - no errors are shown.
+
+Alternatively, if the site already has the token in JS, set a
+function instead of a URL:
+
+   window.CRH_GET_JWT = function () { return somePromiseOfJwt; };
+
+On player logout call:
+
+   CoinsraidHelp.logout()
+
+so the next visitor on the same browser does not see the previous
+player's conversation.
 
 
 UPDATING ARTICLES
