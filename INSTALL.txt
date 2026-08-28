@@ -96,7 +96,11 @@ function instead of a URL:
 
    window.CRH_GET_JWT = function () { return somePromiseOfJwt; };
 
-On player logout call:
+If the player signs in without a page reload, call:
+
+   CoinsraidHelp.login()
+
+and on player logout call:
 
    CoinsraidHelp.logout()
 
