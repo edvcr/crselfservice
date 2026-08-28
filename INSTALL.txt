@@ -47,14 +47,19 @@ manually. Use Option A unless there is a policy reason not to.
 
 HOW IT BEHAVES
 --------------
-- Nothing is visible until the first CoinsraidHelp.open() call.
+- Nothing is visible until the first CoinsraidHelp.open() call. There
+  is no permanent corner button, since the site has its own Help
+  button. To show one anyway, set before the script tag:
+     <script>window.CRH_LAUNCHER = true;</script>
 - The minimize button (-) leaves a small round help icon in the corner
   so the player can come back quickly. The X hides everything again.
 - "Live Chat" opens the Zendesk chat in place of the article panel.
   The standard Zendesk launcher bubble is hidden automatically -
   the widget is the single entry point for support.
 - If an agent replies while the chat is closed, the player gets a
-  small toast notification and an unread counter on the help icon.
+  small toast notification and the help icon appears in the corner
+  with an unread counter, even when the corner button is switched
+  off. Both disappear once the messages have been read.
 - Works on desktop, tablet and mobile (full screen on phones).
 
 Other available calls, if ever needed:
