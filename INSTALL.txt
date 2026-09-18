@@ -87,9 +87,26 @@ tag:
    <script>window.CRH_AUTH_URL = "/api/zendesk/messaging-jwt";</script>
 
 The endpoint is fetched with cookies (credentials: "include") and may
-return either the raw JWT as text or JSON like {"jwt": "..."}.
+return either the raw JWT as text or JSON like {"jwt": "..."}. The
+fields jwt, token, chatToken and accessToken are all accepted.
 If the request fails (e.g. player not logged in), chat simply
 continues anonymously - no errors are shown.
+
+If the endpoint needs a POST, or an authorization header, set an
+object instead of a plain URL:
+
+   <script>
+   window.CRH_AUTH_URL = {
+     url: "https://api.example.com/externalServices/getChatToken",
+     method: "POST",
+     headers: { Authorization: "Bearer " + playerAccessToken }
+   };
+   </script>
+
+POST requests send an empty JSON body by default. Set body to send
+something else. Only use the headers option if the site already has
+the player token in JavaScript; if the endpoint authenticates by
+cookie, the url and method alone are enough.
 
 Alternatively, if the site already has the token in JS, set a
 function instead of a URL:
