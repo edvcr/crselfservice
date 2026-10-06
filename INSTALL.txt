@@ -70,27 +70,43 @@ Other available calls, if ever needed:
   CoinsraidHelp.logout()   sign the player out of chat
 
 
-AUTHENTICATED CHAT (recommended)
---------------------------------
+AUTHENTICATED CHAT
+------------------
 Without this, every chat visitor becomes a new anonymous user in
-Zendesk. With it, chats attach to the real player record (matched by
-the CoreX user ID), so agents see who they are talking to and no
-duplicate users are created.
+Zendesk and is asked for a name. With it, chats attach to the real
+player record (matched by the CoreX user ID), agents see who they are
+talking to, and signed-in players are not asked for name or email.
 
-The site backend must expose an endpoint that returns a Zendesk
-messaging JWT for the currently logged-in player (HS256, signed with
-the "cr-auth" messaging signing key; payload: scope "user",
-external_id = CoreX user ID, name, email, email_verified true, short
-expiry). Then tell the widget where it is, before the widget script
-tag:
+On coinsraider.us (staging) and coinsraid.com (prod) this works with
+NO extra site code. The widget reads the player's sign-in cookie
+(qp_token) and asks the GiG API for a chat token:
+
+  coinsraider.us  ->  https://stg-api-d.gigmagic.io/.../externalServices/getChatToken
+  coinsraid.com   ->  https://api-d.gigmagic.io/.../externalServices/getChatToken
+
+Subdomains (e.g. www.) count as the same site. GiG signs the token
+with the matching Zendesk key for that environment.
+
+It also follows the site's own sign-in state: when a player signs
+out, or a different player signs in on the same browser, the widget
+signs the chat out the next time a page loads or chat is opened, so
+nobody sees the previous player's conversation. Players who are not
+signed in chat anonymously, with no errors.
+
+Optional calls if the site wants instant updates without waiting for
+a page load:
+   CoinsraidHelp.login()    after a player signs in
+   CoinsraidHelp.logout()   after a player signs out
+
+Other domains (custom setups only): set the token source yourself
+before the widget script tag. This overrides the built-in behaviour.
 
    <script>window.CRH_AUTH_URL = "/api/zendesk/messaging-jwt";</script>
 
 The endpoint is fetched with cookies (credentials: "include") and may
 return either the raw JWT as text or JSON like {"jwt": "..."}. The
-fields jwt, token, chatToken and accessToken are all accepted.
-If the request fails (e.g. player not logged in), chat simply
-continues anonymously - no errors are shown.
+fields jwt, token, chatToken and accessToken are all accepted, also
+inside a {"res": ...} wrapper.
 
 If the endpoint needs a POST, or an authorization header, set an
 object instead of a plain URL:
@@ -104,25 +120,10 @@ object instead of a plain URL:
    </script>
 
 POST requests send an empty JSON body by default. Set body to send
-something else. Only use the headers option if the site already has
-the player token in JavaScript; if the endpoint authenticates by
-cookie, the url and method alone are enough.
-
-Alternatively, if the site already has the token in JS, set a
-function instead of a URL:
+something else. Alternatively, set a function that returns the JWT
+(or a promise of it):
 
    window.CRH_GET_JWT = function () { return somePromiseOfJwt; };
-
-If the player signs in without a page reload, call:
-
-   CoinsraidHelp.login()
-
-and on player logout call:
-
-   CoinsraidHelp.logout()
-
-so the next visitor on the same browser does not see the previous
-player's conversation.
 
 
 UPDATING ARTICLES
