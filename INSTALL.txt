@@ -79,7 +79,8 @@ talking to, and signed-in players are not asked for name or email.
 
 On coinsraider.us (staging) and coinsraid.com (prod) this works with
 NO extra site code. The widget reads the player's sign-in cookie
-(qp_token) and asks the GiG API for a chat token:
+(qp_token) and asks the GiG API for a chat token (POST, body
+{"provider":"zendesk"}):
 
   coinsraider.us  ->  https://stg-api-d.gigmagic.io/.../externalServices/getChatToken
   coinsraid.com   ->  https://api-d.gigmagic.io/.../externalServices/getChatToken
