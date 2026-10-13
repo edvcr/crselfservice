@@ -67,6 +67,7 @@ Other available calls, if ever needed:
   CoinsraidHelp.toggle()   open/close
   CoinsraidHelp.chat()     jump straight to live chat
   CoinsraidHelp.login()    retry chat sign-in (see next section)
+  CoinsraidHelp.article(id) open a help article in a pop-up
   CoinsraidHelp.logout()   sign the player out of chat
 
 
@@ -125,6 +126,21 @@ something else. Alternatively, set a function that returns the JWT
 (or a promise of it):
 
    window.CRH_GET_JWT = function () { return somePromiseOfJwt; };
+
+
+HELP ARTICLE LINKS IN CHAT
+--------------------------
+When an agent or the AI agent sends a Help Center link in the chat
+(coinsraidcom.zendesk.com/hc/.../articles/<id>), clicking it opens
+the article in a pop-up in the middle of the page instead of a new
+tab on the Zendesk Help Center. Links inside that article open in the
+same pop-up. Esc, the X or a click outside closes it, and the player
+is back in the chat. Other links still open normally.
+
+The same pop-up can be opened from anywhere on the site:
+   CoinsraidHelp.article(29414532464028)
+or with a link to any page plus #article-<id>, for example
+   https://coinsraid.com/#article-29414532464028
 
 
 UPDATING ARTICLES
