@@ -133,10 +133,14 @@ HELP ARTICLE LINKS IN CHAT
 When an agent or the AI agent sends a Help Center link in the chat
 (coinsraid.com/#article-<id>, or a Zendesk Help Center article
 link), clicking it opens
-the article in a pop-up in the middle of the page instead of a new
-tab on the Zendesk Help Center. Links inside that article open in the
-same pop-up. Esc, the X or a click outside closes it, and the player
-is back in the chat. Other links still open normally.
+the article in a pop-up instead of a new tab on the Zendesk Help
+Center. On desktop it sits next to the open chat (the chat stays
+visible and usable); otherwise it is centred, and on phones it is full
+screen. The minimise button shrinks it to a small tab with the article
+title; click the tab to bring it back. Links inside the article open
+in the same pop-up. Esc, the X or a click on the dimmed page closes it.
+"Back to chat" closes it; "Chat with us" (when no chat is open) opens
+the chat. Other links still open normally.
 
 Preferred link format for chat replies and macros (hides Zendesk):
    https://coinsraid.com/#article-29414532464028
