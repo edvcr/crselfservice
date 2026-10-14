@@ -20,7 +20,8 @@ jobs:
 
       - name: Rebuild snapshot from Zendesk
         env:
-          ZENDESK_HC_TOKEN: ${{ secrets.ZENDESK_HC_TOKEN }}
+          ZENDESK_CLIENT_ID: ${{ secrets.ZENDESK_CLIENT_ID }}
+          ZENDESK_CLIENT_SECRET: ${{ secrets.ZENDESK_CLIENT_SECRET }}
         run: python3 scripts/refresh_articles.py
 
       - name: Commit if changed
