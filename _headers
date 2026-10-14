@@ -1,0 +1,5 @@
+# Cloudflare Pages response headers. The site (coinsraid.com / coinsraider.us) loads these
+# files from another domain, so they need CORS; short caching lets updates reach players quickly.
+/dist/*
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=600
