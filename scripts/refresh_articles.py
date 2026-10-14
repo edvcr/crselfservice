@@ -10,6 +10,7 @@ import datetime
 import json
 import os
 import sys
+import urllib.error
 import urllib.request
 
 BASE = "https://coinsraidcom.zendesk.com"
@@ -22,8 +23,16 @@ def get_token():
         body = json.dumps({"grant_type": "client_credentials", "client_id": cid,
                            "client_secret": secret, "scope": "hc:read"}).encode()
         req = urllib.request.Request(BASE + "/oauth/tokens", data=body, headers={"Content-Type": "application/json"})
-        with urllib.request.urlopen(req, timeout=30) as res:
-            return json.load(res)["access_token"]
+        try:
+            with urllib.request.urlopen(req, timeout=30) as res:
+                return json.load(res)["access_token"]
+        except urllib.error.HTTPError as e:
+            try:
+                err = json.load(e)
+            except Exception:
+                err = {}
+            sys.exit(f"Zendesk refused the token request ({e.code}): {err.get('error')} - {err.get('error_description')}. "
+                     "Check ZENDESK_CLIENT_ID is the OAuth client's Identifier and ZENDESK_CLIENT_SECRET its current Secret.")
     if os.environ.get("ZENDESK_HC_TOKEN"):
         return os.environ["ZENDESK_HC_TOKEN"]
     sys.exit("Set ZENDESK_CLIENT_ID and ZENDESK_CLIENT_SECRET under Settings > Secrets and variables > Actions")
