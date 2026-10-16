@@ -153,6 +153,31 @@ From the site's own code the pop-up can also be opened with:
    CoinsraidHelp.article(29414532464028)
 
 
+FOOTER LINKS
+------------
+Plain links are enough. Clicking one opens the help panel or the
+article pop-up on the current page, every time it is clicked, without
+leaving the page. The same addresses also work when opened directly.
+
+Support column:
+   <a href="#help">Help &amp; Support</a>
+   <a href="#article-29414532370460">FAQ</a>
+   <a href="#article-29414532464028">How to Redeem Prizes</a>
+   <a href="#article-29414547757724">Verify Your Account</a>
+
+Legal / responsible play area:
+   <a href="#article-29414532635676">Responsible Social Play</a>
+   <a href="#article-29414547615388">Free Entry (AMOE)</a>
+
+"Help & Support" opens the help panel. Live chat is one tap away
+inside it ("Ask for help"), so no separate "Contact Support" link
+is needed. #support works the same as #help.
+
+Full addresses, for emails or other sites:
+   https://coinsraid.com/#help
+   https://coinsraid.com/#article-29414532370460   (FAQ)
+
+
 UPDATING ARTICLES
 -----------------
 Articles are loaded live from the Help Center when it is reachable.
