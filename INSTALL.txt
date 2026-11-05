@@ -173,6 +173,10 @@ Legal / responsible play area:
 inside it ("Ask for help"), so no separate "Contact Support" link
 is needed. #support works the same as #help.
 
+To open the live chat directly (skipping the help panel):
+   <a href="#chat">Chat with us</a>
+   https://coinsraid.com/#chat   (full address, for emails or other sites)
+
 Full addresses, for emails or other sites:
    https://coinsraid.com/#help
    https://coinsraid.com/#article-29414532370460   (FAQ)
