@@ -184,10 +184,12 @@ Full addresses, for emails or other sites:
 
 UPDATING ARTICLES
 -----------------
-Articles are loaded live from the Help Center when it is reachable.
-The help-articles.json file is only a backup used when it is not.
-To refresh the backup after articles change in Zendesk, ask for a new
-help-articles.json and replace the old file. Nothing else to do.
+Articles come from dist/help-articles.json, a copy of all published
+Help Center articles. A GitHub Action refreshes it from Zendesk every
+hour (at :17) and only replaces it after a successful fetch, so the
+widget keeps working with the last good copy if Zendesk is down.
+To refresh it straight away, run "Refresh help articles" from the
+repository's Actions tab. Players get the new copy within 5 minutes.
 
 
 ANALYTICS (optional)
